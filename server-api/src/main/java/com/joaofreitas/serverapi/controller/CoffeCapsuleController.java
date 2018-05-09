@@ -11,34 +11,36 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin()
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/capsulas")
 public class CoffeCapsuleController {
 
     @Autowired
     CoffeCapsuleRepository coffeCapsuleRepository;
 
     //GET pra todas as capsulas de cafe
-    @GetMapping ("/capsulas")
+    @GetMapping
     public List<CoffeCapsule> pegaTodasCapsulas(){
         return coffeCapsuleRepository.findAll();
     }
     //Cria nova capsula
 
-    @PostMapping("/capsulas")
+    @PostMapping
     public CoffeCapsule criaCapsula(@Valid @RequestBody CoffeCapsule coffeCapsule) {
         return coffeCapsuleRepository.save(coffeCapsule);
     }
     //GET para única capsula de café
 
-    @GetMapping("/capsulas/{id}")
+    @GetMapping("/{id}")
     public CoffeCapsule pegaCapsulaPorId(@PathVariable(value = "id") Long coffeCapsuleId){
         return coffeCapsuleRepository.findById(coffeCapsuleId)
                 .orElseThrow( () -> new ResourceNotFoundException("CoffeCapsule", "id", coffeCapsuleId));
     }
     //PUT para dar update numa cápsula de cafe
 
-    @PutMapping("/capsulas")
+    @PutMapping
     public CoffeCapsule updateCapsula(@PathVariable(value = "id") Long coffeCapsuleId, @Valid @RequestBody CoffeCapsule detalheCapsula){
 
         CoffeCapsule coffeCapsule = coffeCapsuleRepository.findById(coffeCapsuleId).
@@ -49,7 +51,7 @@ public class CoffeCapsuleController {
         return capsulaAtual;
     }
     //DELETE uma capsula de café
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deletaCapsula(@PathVariable(value = "id") Long coffeCapsuleId){
 
         CoffeCapsule coffeCapsule = coffeCapsuleRepository.findById(coffeCapsuleId).

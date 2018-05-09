@@ -18,10 +18,14 @@ public class CoffeCapsule implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+
+    @NotBlank(message = "Marca não pode ser nula.")
     private String marca;
-    @NotBlank
+
+    @NotBlank(message = "Sabor não pode ser nulo.")
     private String sabor;
+
+
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -29,9 +33,7 @@ public class CoffeCapsule implements Serializable {
 
 
     public CoffeCapsule() {
-        /*this.marca = marca;
-        this.sabor = sabor;
-        this.validade = validade;*/
+
     }
 
 
