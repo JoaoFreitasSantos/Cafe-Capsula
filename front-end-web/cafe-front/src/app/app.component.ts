@@ -1,3 +1,4 @@
+import { Http } from '@angular/http';
 import { CoffeCapsule } from './../Cafe';
 
 import { CafeService } from './cafe.service';
@@ -14,12 +15,15 @@ export class AppComponent implements OnInit {
   title: "app";
   capsulas: Array<CoffeCapsule>;
   capsula: CoffeCapsule;
+  //marca: string = "";
+  //sabor: string = "";
   constructor(public cafeService: CafeService){
-    
   }
+
 
   ngOnInit() {
     this.getAll();
+    this.capsula = new CoffeCapsule;
   }
 
   getAll(){
@@ -28,13 +32,27 @@ export class AppComponent implements OnInit {
     });
   }
 
-  addCapsule(){
-    this.cafeService.criaCapsulas(this.capsula);
-    this.capsula = new CoffeCapsule;
+  removeCapsula(capsula){
+    this.capsula = capsula;
+    this.cafeService.deletaCapsula(capsula).subscribe(saida => {
+      this.capsulas.slice(capsula,1);
+      //this.capsulas.slice(capsula);
+      this.getAll();
+    });
+//    this.getAll();
   }
 
-  removeCapsula(capsula){
-    this.cafeService.deletaCapsula(capsula);
+  addCapsule(){
+    //this.capsula = new CoffeCapsule();
+    this.cafeService.criaCapsulas(this.capsula).subscribe(saida => {
+      this.capsulas.push(<CoffeCapsule>saida);
+      this.capsula = new CoffeCapsule();
+      this.getAll();
+    });
+    console.log(this.capsula);
+    this.getAll();
   }
+
+  
 
 }

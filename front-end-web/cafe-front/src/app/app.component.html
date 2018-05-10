@@ -42,7 +42,7 @@
                     <th scope="col" class="text-center">Validade</th>
                 </tr>
             </thead>
-            <tbody *ngFor="let capsula of capsulas">
+            <tbody style="width:100%" *ngFor="let capsula of capsulas">
                 <tr>
                     <th scope="row" class="text-center">{{capsula.id}}</th>
                     <td class="text-center"> {{capsula.marca}}</td>
@@ -50,13 +50,29 @@
                     <td class="text-center">{{capsula.validade | date : "dd/MM/y" }}</td>
                     <button class="btn btn-secondary">Editar Cápsula</button>
                     <!--inserir metodo editCapsula(capsula) em  (click)="" dentro do button-->
-                    <button class="btn btn-danger">Apagar Cápsula</button>
+                    <button class="btn btn-danger" (click)="removeCapsula(capsula.id)">Apagar Cápsula {{capsula.id}}</button>
                     <!--inserir metodo deleteCapsula(capsula)-->
                     <!-- </div> -->
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <h2>Cadastro de Capsulas</h2>
+    <div>
+        <form #regForm="ngForm" class="form-group" ngmodel="capsula">
+            <label for="marca">Marca:</label>
+            <input type="text" [(ngModel)]="capsula.marca" name="marca" class="form-control" id="marca" placeholder="Coloque aqui o sabor do seu café" />
+            <br>
+            <label for="saborCafe">Sabor:</label>
+            <input type="text" [(ngModel)]="capsula.sabor" name="sabor" class="form-control" id="sabor" placeholder="Coloque aqui o sabor do seu café" />
+
+
+            <button type="submit" class="btn btn-outline-primary" (click)="addCapsule(capsula)">Inserir</button>
+        </form>
+    </div>
+
+
 </body>
 
 </html>

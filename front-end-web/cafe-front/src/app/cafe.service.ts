@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CafeService {
   private urlCafe: string = 'http://localhost:8080/capsulas';
-  private headers = new Headers({'Content-Type': 'application.json'})
+  private headers = new Headers({'Content-Type': 'application/json'})
   private options = new RequestOptions({headers: this.headers });
   private coffeCapsule: CoffeCapsule;
 
@@ -31,9 +31,10 @@ export class CafeService {
     return resultado;
   }
 
-  deletaCapsula(capsulaId: number){
-    this.http.delete(this.urlCafe + "/" + capsulaId,this.options);
+  deletaCapsula(capsulaId){
+    return this.http.delete(this.urlCafe + "/" + capsulaId,this.options);
   }
+
 
   
   //GET com id
