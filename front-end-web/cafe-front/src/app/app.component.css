@@ -1,0 +1,23 @@
+.formulario {
+    border: 2px solid #007bff;
+    padding: 10px;
+    border-radius: 15px 50px;
+    background-color: #212529;
+    color: white;
+}
+
+.textocafe {
+    font-weight: bold;
+}
+
+.formulario2 {
+    border: 2px solid #007bff;
+    padding: 10px;
+    border-radius: 15px 5px;
+    background-color: #212529;
+}
+
+.footerpagina {
+    color: #0076c0;
+    height: 50px;
+}
